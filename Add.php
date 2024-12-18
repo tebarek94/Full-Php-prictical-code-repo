@@ -29,7 +29,19 @@ if (isset($_POST["submit"])) {
 
     // Validate ingredients
     if (empty($ingredients)) {
+
         $error['ingredients'] = "Ingredients are required <br>";
+    }
+    else{
+        if(preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]+)*$/',$ingredients)){
+            $error['ingredients'] = "Ingredients Must be a comma separted";
+        }
+    }
+    if(array_filter($error)){
+        echo "Errors in the form";
+    }
+    else{
+        echo "Form is valid ";
     }
 }
 ?>
