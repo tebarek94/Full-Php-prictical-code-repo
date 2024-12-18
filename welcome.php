@@ -1,5 +1,9 @@
 <?php
+// Show the error in the form
+$error = array('email' => '', "title" => "", "ingredients" => "");
+
 if (isset($_POST["submit"])) {
+    
     // Sanitize inputs
     $email = htmlspecialchars($_POST["email"]);
     $title = htmlspecialchars($_POST["title"]);
@@ -7,19 +11,19 @@ if (isset($_POST["submit"])) {
 
     // Validate email
     if (empty($email)) {
-        echo "An email is required <br>";
+        $error['email']= "An email is required <br>";
     } else {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "You must enter a valid email address!! <br>";
+            $error['email'] = "You must enter a valid email address!! <br>"; // Fixed the error here
         }
     }
 
     // Validate title (only letters and spaces allowed)
     if (empty($title)) {
-        echo "A title is required <br>";
+        $error["title"]= "A title is required <br>";
     } else {
         if (!preg_match('/^[a-zA-Z\s]+$/', $title)) {
-            echo "Title must only contain letters and spaces <br>";
+            $error["title"] = "Title must only contain letters and spaces <br>"; // Fixed the error here
         } else {
             echo "Title: " . $title . "<br>";
         }
@@ -27,9 +31,9 @@ if (isset($_POST["submit"])) {
 
     // Validate ingredients
     if (empty($ingredients)) {
-        echo "Ingredients are required <br>";
+        $error['ingredients'] = "Ingredients are required <br>"; // Fixed the error here
     } else {
-        echo "Ingredients: " . $ingredients . "<br>";
+         $error['ingredients']= "Ingredients: " . $ingredients . "<br>";
     }
 }
 ?>
